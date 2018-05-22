@@ -65,7 +65,7 @@ public class OvChipkaartDaoImp extends OracleBaseDAO implements OvChipkaartDAO {
 
 			while (ov.next()) {
 				OvChipkaart o = new OvChipkaart(ov.getInt("KAARTNUMMER"), ov.getString("GELDIGTOT"), ov.getInt("KLASSE"),
-						ov.getInt("SALDO"), ov.getInt("REIZIGERID"));
+						ov.getDouble("SALDO"), ov.getInt("REIZIGERID"));
 				list.add(o);
 			}
 
@@ -74,6 +74,7 @@ public class OvChipkaartDaoImp extends OracleBaseDAO implements OvChipkaartDAO {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		
 		return list;
 	}
 
@@ -84,10 +85,9 @@ public class OvChipkaartDaoImp extends OracleBaseDAO implements OvChipkaartDAO {
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet ov = stmt.executeQuery("Select * from OV_CHIPKAART where KAARTNUMMER=" + kaartnr);
-
 			while (ov.next()) {
 				OvChipkaart o = new OvChipkaart(ov.getInt("KAARTNUMMER"), ov.getString("GELDIGTOT"), ov.getInt("KLASSE"),
-						ov.getInt("SALDO"), ov.getInt("REIZIGERID"));
+						ov.getDouble("SALDO"), ov.getInt("REIZIGERID"));
 				gevondenOv.add(o);
 			}
 
@@ -99,6 +99,48 @@ public class OvChipkaartDaoImp extends OracleBaseDAO implements OvChipkaartDAO {
 		return gevondenOv;
 	}
 
+	// find by reizigerid
+	public List<OvChipkaart> findByID(int id) {
+		ArrayList<OvChipkaart> gevondenOv = new ArrayList<OvChipkaart>();
+
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet ov = stmt.executeQuery("Select * from OV_CHIPKAART where REIZIGERID=" + id);
+			while (ov.next()) {
+				OvChipkaart o = new OvChipkaart(ov.getInt("KAARTNUMMER"), ov.getString("GELDIGTOT"), ov.getInt("KLASSE"),
+						ov.getDouble("SALDO"), ov.getInt("REIZIGERID"));
+				gevondenOv.add(o);
+			}
+
+			ov.close();
+			stmt.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return gevondenOv;
+	}
+	
+	public List<OvChipkaart> findByReiziger(Reiziger r) {
+		ArrayList<OvChipkaart> gevondenOv = new ArrayList<OvChipkaart>();
+
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet ov = stmt.executeQuery("Select * from OV_CHIPKAART where REIZIGERID="+ r.getIdNr());
+			while (ov.next()) {
+				OvChipkaart o = new OvChipkaart(ov.getInt("KAARTNUMMER"), ov.getString("GELDIGTOT"), ov.getInt("KLASSE"),
+						ov.getDouble("SALDO"), ov.getInt("REIZIGERID"));
+				o.setOvhouder(r);
+				gevondenOv.add(o);
+			}
+
+			ov.close();
+			stmt.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return gevondenOv;
+	}
+	
 	// save
 	public OvChipkaart save(OvChipkaart ov) throws SQLException {
 		Statement stmt = conn.createStatement();

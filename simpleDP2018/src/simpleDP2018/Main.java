@@ -2,6 +2,7 @@ package simpleDP2018;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.sql.Date;
 
 public class Main {
 
@@ -9,23 +10,25 @@ public class Main {
 
 		ReizigerDAO rDAO = new ReizigerDaoImpl();
 		OvChipkaartDAO oDAO = new OvChipkaartDaoImp();
-
-		printAll(oDAO);
-		findByKaartNummer(oDAO);
-		SaveOv(oDAO);
-		updateOv(oDAO);
-		deleteOv(oDAO);
+//		findByReizigerId(rDAO);
+		printAll(rDAO);
+//		printAll(oDAO);
+//		findByKaartNummer(oDAO);
+//		SaveOv(oDAO);
+//		updateOv(oDAO);
+//		deleteOv(oDAO);
 
 	}
 
 	private static void printAll(ReizigerDAO rDAO) {
+
+		System.out.println("Opgeslagen Reiziger :");
 		List<Reiziger> rList = rDAO.findAll();
-
-		System.out.println("Opgeslagen Reiziger");
-
-		for (Reiziger object : rList) {
-			System.out.println(object);
+		for (Reiziger robject : rList) {
+			System.out.println(robject);
 		}
+
+
 	}
 
 	private static void printAll(OvChipkaartDAO oDAO) {
@@ -49,11 +52,23 @@ public class Main {
 		}
 
 	}
+	
+	private static void findByReizigerId(ReizigerDAO rDAO) {
+		int nummer = 2;
+		List<Reiziger> rList = rDAO.findById(nummer);
+
+		System.out.println("Ov Chipkaarten met kaarnummer " + nummer + ":");
+
+		for (Reiziger rbject : rList) {
+			System.out.println(rbject);
+		}
+
+	}
 
 	// save ovchipkaart
 	private static void SaveOv(OvChipkaartDAO oDAO) throws SQLException {
 		OvChipkaart result = null;
-		OvChipkaart newOv = new OvChipkaart(90000, "31-12-2019", 2, (50), 5);
+		OvChipkaart newOv = new OvChipkaart(90000,"31-12-2019", 2, (50), 5);
 		System.out.println("Test Save(OvChipkaart)");
 		result = oDAO.save(newOv);
 		System.out.println("Ov chipkaart opgeslagen: " + result);

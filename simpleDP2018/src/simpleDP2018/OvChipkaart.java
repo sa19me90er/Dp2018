@@ -6,11 +6,11 @@ public class OvChipkaart {
 	private int kaartNummer;
 	private String geldigTot;
 	private int klasse;
-	private int saldo;
+	private double saldo;
 	private int reizegerID;
 	private Reiziger ovhouder;
 	
-OvChipkaart(int knr, String gt, int kls, int sld, int rID ){
+OvChipkaart(int knr, String gt, int kls, double sld, int rID ){
 	kaartNummer=knr;
 	geldigTot=gt;
 	klasse=kls;
@@ -56,11 +56,11 @@ public void setKlasse(int kls){
 	klasse=kls;	
 }
 
-public int getSaldo(){
+public double getSaldo(){
 	return saldo;	
 }
 
-public void setSaldo(int sld){
+public void setSaldo(double sld){
 	saldo=sld;	
 }
 
@@ -91,7 +91,7 @@ public boolean equals(Object obj) {
 @Override
 public String toString() {
 	return "OvChipkaart [kaartNummer=" + kaartNummer + ", geldigTot=" + geldigTot + ", klasse=" + klasse + ", saldo="
-			+ saldo + ", reizegerID=" + reizegerID + "]";
+			+ saldo + ", reizegerID=" + reizegerID + ", Reiziger= " +ovhouder.toString2()+ "]";
 }
 
 

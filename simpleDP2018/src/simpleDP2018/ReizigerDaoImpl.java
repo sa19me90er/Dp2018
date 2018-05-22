@@ -2,6 +2,7 @@ package simpleDP2018;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -11,68 +12,43 @@ public class ReizigerDaoImpl extends OracleBaseDAO
 		getConnection();
 	}
 	
-	private static ArrayList<Reiziger> alleReiziger = new ArrayList<Reiziger>(); 
-/*	public List<Reiziger> findAll() {
-
-		return alleReiziger;
-	}
-*/	
 	public List<Reiziger> findById(int id) {
-		
-		return alleReiziger;
-	}
+/*		
+		List<Reiziger> reiziger = new ArrayList<Reiziger>();
+		List<OvChipkaart> rezigerOv= ((Reiziger) reiziger).getKarten();
 
-	
-	public List<Reiziger> findByGBdatum(Date GBdatum) {
-		   List<Reiziger> gevondenReizigers = new ArrayList<Reiziger>();
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet ov = stmt.executeQuery("Select * from Ov_Chipkaart where REIZIGERID=" +id);
 
-		   for (Reiziger eenReiziger : alleReiziger) {
-		      if (eenReiziger.getGBdatum()==GBdatum) {
-		         gevondenReizigers.add(eenReiziger);
-		      }
-		   }
+			while (ov.next()) {
+				OvChipkaart ovc =  new OvChipkaart(ov.getInt("KAARTNUMMER"), ov.getString("GELDIGTOT"), ov.getInt("KLASSE"),
+						ov.getInt("SALDO"), ov.getInt("REIZIGERID"));
+				rezigerOv.add(ovc);
+			}
 
-		   return gevondenReizigers;
+			ov.close();
+			stmt.close();
+		} catch (Exception e) {
+			System.out.println(e);
 		}
-
-
-	
-	
-	public Reiziger save (Reiziger reiziger){
-		 alleReiziger.add (reiziger);
-		 return reiziger;
-	}
-
-	public Reiziger update (Reiziger reiziger){
-		int x = alleReiziger.indexOf(reiziger);
-		if (x == -1) {return null;}
 		
-		alleReiziger.set(x, reiziger);
-		
-		return reiziger;
-		
+		return rezigerOv;
+*/
+		return null;
 	}
 	
-	public boolean delete (Reiziger r){
-		return alleReiziger.remove(r);
-		
-	}
-	
-	
-	    public String toString(){
-		 for (Reiziger object: alleReiziger) {
-			    System.out.println(object);
-		 	}
-		 
-		    return   " ";
 
-	    }
-	    
+
+	
+	
+
+
 	    
 		@Override
-		/* als er geen cursus is gevonden, geeft hij een lege lijst terug  */
 		public List<Reiziger> findAll() {
-			ArrayList<Reiziger> list = new ArrayList<Reiziger>();
+			ArrayList<Reiziger> list = new ArrayList<>();
+	
 			Reiziger r = null;
 
 			try {
@@ -80,20 +56,35 @@ public class ReizigerDaoImpl extends OracleBaseDAO
 				ResultSet rs = stmt.executeQuery("Select * from reiziger");
 
 				while (rs.next()) {
+					
+					OvChipkaartDaoImp oDAO= new OvChipkaartDaoImp();
+					
+					
+					
 					r = new Reiziger(rs.getInt("REIZIGERID"), rs.getString("VOORLETTERS"), 
-							rs.getString("TUSSENVOEGSEL"), rs.getString("ACHTERNAAM"),rs.getDate("GEBORTEDATUM"));
-					list.add(r);
-				}
+						rs.getString("TUSSENVOEGSEL"), rs.getString("ACHTERNAAM"),rs.getDate("GEBORTEDATUM"));
+					
+					List<OvChipkaart> OvVanReiziger= oDAO.findByReiziger(r);
 
+					r.setKarten(OvVanReiziger);
+
+
+					list.add(r);
+
+
+//					for (OvChipkaart object : OvVanReiziger) {
+////						if (object==null || OvVanReiziger.isEmpty()) 
+////						{System.out.println("nog geen ov chipkaart");} 
+////						else
+//						System.out.println(object);
+//					}					
+					
+				}
 				rs.close();
 				stmt.close();	
 			} catch (Exception e) {
 				System.out.println(e);
-			} 
-			return list;
-		}
-		
-	    
-	
+			} 			
+			return list;			
+		}	
 }
-
