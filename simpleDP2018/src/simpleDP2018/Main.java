@@ -13,10 +13,10 @@ public class Main {
 //		findByReizigerId(rDAO);
 		printAll(rDAO);
 		printAll(oDAO);
-		findByKaartNummer(oDAO);
-		SaveOv(oDAO);
-		updateOv(oDAO);
-		deleteOv(oDAO);
+//		findByKaartNummer(oDAO);
+//		SaveOv(oDAO);
+//		updateOv(oDAO);
+//		deleteOv(oDAO);
 
 	}
 
@@ -52,9 +52,9 @@ public class Main {
 		}
 
 	}
-	
+	/*
 	private static void findByReizigerId(ReizigerDAO rDAO) {
-		int nummer = 90001;
+		int nummer = 3;
 		List<Reiziger> rList = rDAO.findById(nummer);
 
 		System.out.println("Ov Chipkaarten met kaarnummer " + nummer + ":");
@@ -64,7 +64,7 @@ public class Main {
 		}
 
 	}
-
+*/
 	// save ovchipkaart
 	private static void SaveOv(OvChipkaartDAO oDAO) throws SQLException {
 		OvChipkaart result = null;

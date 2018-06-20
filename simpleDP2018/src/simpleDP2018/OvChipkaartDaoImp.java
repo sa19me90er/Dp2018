@@ -73,6 +73,10 @@ public class OvChipkaartDaoImp extends OracleBaseDAO implements OvChipkaartDAO {
 				OvChipkaart o = new OvChipkaart(ov.getInt("KAARTNUMMER"), ov.getDate("GELDIGTOT"), ov.getInt("KLASSE"),
 						ov.getDouble("SALDO"), ov.getInt("REIZIGERID"));
 				list.add(o);
+				
+				ReizigerDaoImpl rDAO = new ReizigerDaoImpl();
+				Reiziger ovHouder =  rDAO.findById(o.getReizegerID());
+				o.setOvhouder((Reiziger) ovHouder);
 			}
 
 			ov.close();
@@ -95,8 +99,11 @@ public class OvChipkaartDaoImp extends OracleBaseDAO implements OvChipkaartDAO {
 				OvChipkaart o = new OvChipkaart(ov.getInt("KAARTNUMMER"), ov.getDate("GELDIGTOT"), ov.getInt("KLASSE"),
 						ov.getDouble("SALDO"), ov.getInt("REIZIGERID"));
 				gevondenOv.add(o);
+			
+			ReizigerDaoImpl rDAO = new ReizigerDaoImpl();
+			Reiziger ovHouder = (Reiziger) rDAO.findById(o.getReizegerID());
+			o.setOvhouder(ovHouder);
 			}
-
 			ov.close();
 			stmt.close();
 		} catch (Exception e) {
@@ -178,5 +185,6 @@ public class OvChipkaartDaoImp extends OracleBaseDAO implements OvChipkaartDAO {
 	return ov;
 
 	}
+	
 
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ReizigerDAO {
 	public List<Reiziger> findAll();
-	public List<Reiziger> findById(int id);
+	public Reiziger findById(int id);
 //	public Reiziger save (Reiziger reiziger);
 //	public Reiziger update (Reiziger reiziger);
 //	public boolean delete (Reiziger r);

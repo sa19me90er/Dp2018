@@ -82,6 +82,7 @@ public class Reiziger {
 	}
 
 	public String toString2() {
+
 		if (tusVgls == null) {
 			return "[" + idNr + ", " + vLetter + " " + naam + ", " + gbdatum +"]";
 		} else

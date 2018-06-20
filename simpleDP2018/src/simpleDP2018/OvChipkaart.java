@@ -89,9 +89,16 @@ public boolean equals(Object obj) {
 }
 
 @Override
+
 public String toString() {
+	if (ovhouder==null){
 	return "OvChipkaart [kaartNummer=" + kaartNummer + ", geldigTot=" + geldigTot + ", klasse=" + klasse + ", saldo="
-			+ saldo + ", reizegerID=" + reizegerID +"]";
+			+ saldo + "]";
+	}
+	else{
+		return "OvChipkaart [kaartNummer=" + kaartNummer + ", geldigTot=" + geldigTot + ", klasse=" + klasse + ", saldo="
+				+ saldo + ", reizeger=" + ovhouder.toString2() +"]";
+	}
 }
 
 
