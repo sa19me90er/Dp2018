@@ -4,13 +4,13 @@ import java.sql.Date;
 
 public class OvChipkaart {
 	private int kaartNummer;
-	private String geldigTot;
+	private Date geldigTot;
 	private int klasse;
 	private double saldo;
 	private int reizegerID;
 	private Reiziger ovhouder;
 	
-OvChipkaart(int knr, String gt, int kls, double sld, int rID ){
+OvChipkaart(int knr, Date gt, int kls, double sld, int rID ){
 	kaartNummer=knr;
 	geldigTot=gt;
 	klasse=kls;
@@ -40,11 +40,11 @@ public void setKaartNummer(int k){
 	kaartNummer=k;	
 }
 
-public String getGeldigTot(){
+public Date getGeldigTot(){
 	return geldigTot;	
 }
 
-public void setGeldigTot(String gl){
+public void setGeldigTot(Date gl){
 	geldigTot=gl;	
 }
 
@@ -91,7 +91,7 @@ public boolean equals(Object obj) {
 @Override
 public String toString() {
 	return "OvChipkaart [kaartNummer=" + kaartNummer + ", geldigTot=" + geldigTot + ", klasse=" + klasse + ", saldo="
-			+ saldo + ", reizegerID=" + reizegerID + ", Reiziger= " +ovhouder.toString2()+ "]";
+			+ saldo + ", reizegerID=" + reizegerID +"]";
 }
 
 

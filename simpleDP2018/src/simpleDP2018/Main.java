@@ -42,7 +42,7 @@ public class Main {
 	}
 
 	private static void findByKaartNummer(OvChipkaartDAO oDAO) {
-		int nummer = 90537;
+		int nummer = 35283;
 		List<OvChipkaart> oList = oDAO.findByKaartNummer(nummer);
 
 		System.out.println("Ov Chipkaarten met kaarnummer " + nummer + ":");
@@ -54,7 +54,7 @@ public class Main {
 	}
 	
 	private static void findByReizigerId(ReizigerDAO rDAO) {
-		int nummer = 2;
+		int nummer = 90001;
 		List<Reiziger> rList = rDAO.findById(nummer);
 
 		System.out.println("Ov Chipkaarten met kaarnummer " + nummer + ":");
@@ -68,7 +68,7 @@ public class Main {
 	// save ovchipkaart
 	private static void SaveOv(OvChipkaartDAO oDAO) throws SQLException {
 		OvChipkaart result = null;
-		OvChipkaart newOv = new OvChipkaart(90000,"31-12-2019", 2, (50), 5);
+		OvChipkaart newOv = new OvChipkaart(300010, java.sql.Date.valueOf("2020-12-01"), 2, 100, 3);
 		System.out.println("Test Save(OvChipkaart)");
 		result = oDAO.save(newOv);
 		System.out.println("Ov chipkaart opgeslagen: " + result);
@@ -76,7 +76,7 @@ public class Main {
 	};
 
 	private static void deleteOv(OvChipkaartDAO oDAO) {
-		boolean x = oDAO.delete(90000);
+		boolean x = oDAO.delete(80000);
 		if (x == true) {
 			System.out.println("Ov met Kaartnummer 90000 is verwiderd!");
 		}
@@ -85,21 +85,21 @@ public class Main {
 
 	private static void updateOv(OvChipkaartDAO oDAO) {
 
-		List<OvChipkaart> oList = oDAO.findByKaartNummer(90000);
+		List<OvChipkaart> oList = oDAO.findByKaartNummer(35283);
 
 		for (OvChipkaart object : oList) {
-			System.out.println("was: " + object);
+			System.out.println("Update:"+ '\n'+ "was: " + object);
 
-			OvChipkaart newOv = new OvChipkaart(90000, "31-12-2020", 2, 100, 5);
+			OvChipkaart newOv = new OvChipkaart(35283, java.sql.Date.valueOf("2018-05-01"), 2, 100, 3);
 			oDAO.update(newOv);
 
-			List<OvChipkaart> oList2 = oDAO.findByKaartNummer(90000);
+			List<OvChipkaart> oList2 = oDAO.findByKaartNummer(35283);
 
 			for (OvChipkaart object2 : oList2) {
 				System.out.println("and now : " + object2);
 
 			}
-			;
+			
 		}
 
 	}

@@ -72,12 +72,7 @@ public class ReizigerDaoImpl extends OracleBaseDAO
 					list.add(r);
 
 
-//					for (OvChipkaart object : OvVanReiziger) {
-////						if (object==null || OvVanReiziger.isEmpty()) 
-////						{System.out.println("nog geen ov chipkaart");} 
-////						else
-//						System.out.println(object);
-//					}					
+				
 					
 				}
 				rs.close();
