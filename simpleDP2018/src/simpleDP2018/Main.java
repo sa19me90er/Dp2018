@@ -10,13 +10,13 @@ public class Main {
 
 		ReizigerDAO rDAO = new ReizigerDaoImpl();
 		OvChipkaartDAO oDAO = new OvChipkaartDaoImp();
-//		findByReizigerId(rDAO);
+		findByReizigerId(rDAO);
 		printAll(rDAO);
-//		printAll(oDAO);
-//		findByKaartNummer(oDAO);
-//		SaveOv(oDAO);
-//		updateOv(oDAO);
-//		deleteOv(oDAO);
+		printAll(oDAO);
+		findByKaartNummer(oDAO);
+		SaveOv(oDAO);
+		updateOv(oDAO);
+		deleteOv(oDAO);
 
 	}
 
